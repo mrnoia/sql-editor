@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c6fc676-0b01-4af5-b332-cc73c7c912f9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/init_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,11 +27,15 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/UK80133506/OneDrive - Tesco/Documents/GitHubMrnoia/sql-editor"
+    "last_opened_file_path": "C:/Users/UK80133506/OneDrive - Tesco/Documents/GitHubMrnoia/sql-editor/templates1"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\UK80133506\OneDrive - Tesco\Documents\GitHubMrnoia\sql-editor\templates1" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\UK80133506\OneDrive - Tesco\Documents\GitHubMrnoia\sql-editor\templates1" />
       <recent name="C:\Users\UK80133506\OneDrive - Tesco\Documents\GitHubMrnoia\sql-editor\templates" />
     </key>
   </component>

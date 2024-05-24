@@ -8,6 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tabulator CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.1.0/css/tabulator_simple.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <!-- CodeMirror Theme CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css">
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <!-- CodeMirror SQL Mode -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/sql/sql.min.js"></script>
 </head>
 <body>
     <div class="container mt-5">
@@ -123,5 +130,19 @@
             executeBtn.addEventListener('click', executeQuery);
         });
     </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialize CodeMirror on the textarea with id 'sql-query'
+    const sqlEditor = CodeMirror.fromTextArea(document.getElementById('sql-query1'), {
+      mode: 'text/x-sql', // Set the mode to SQL
+      theme: 'material-darker', // Set the theme
+      lineNumbers: true, // Enable line numbers
+      matchBrackets: true, // Highlight matching brackets
+      indentWithTabs: true, // Indent with tabs
+      smartIndent: true, // Smart indentation
+      autofocus: true, // Autofocus on the editor
+    });
+  });
+</script>
 </body>
 </html>

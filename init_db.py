@@ -46,7 +46,17 @@ def init_db():
                 (1, 'Laptop', 1),
                 (1, 'Mouse', 2),
                 (2, 'Keyboard', 1),
-                (3, 'Monitor', 1);
+                (3, 'Monitor', 1),
+                (4, 'Hard Drive', 1),
+                (5, 'Graphics Card', 1),
+                (6, 'RAM', 2),
+                (7, 'Power Supply', 1),
+                (8, 'Motherboard', 1),
+                (9, 'CPU', 1),
+                (10, 'Monitor', 2),
+                (11, 'Keyboard', 1),
+                (12, 'Mouse', 2),
+                (13, 'Webcam', 1);
                 """))
                 print("Inserted sample data into orders table.")
 
