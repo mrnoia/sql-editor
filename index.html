@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Editor</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tabulator CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.1.0/css/tabulator_simple.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="mb-4">
+            <h1>SQL Editor</h1>
+        </header>
+        <main>
+            <div class="mb-3">
+                <textarea id="sql-query" class="form-control" rows="5" placeholder="Enter your SQL query..."></textarea>
+            </div>
+            <div class="mb-3">
+                <button id="execute-btn" class="btn btn-primary">Execute</button>
+            </div>
+            <div id="error-message" class="alert alert-danger d-none" role="alert"></div>
+            <div id="table-container"></div>
+        </main>
+        <footer class="mt-5">
+            <p class="text-center">&copy; 2024 SQL Editor</p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Tabulator JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.1.0/js/tabulator.min.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sqlQueryInput = document.getElementById('sql-query');
+            const executeBtn = document.getElementById('execute-btn');
+            const errorMessage = document.getElementById('error-message');
+
+            // Function to display error message
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('d-none');
+            }
+
+            // Function to hide error message
+            function hideError() {
+                errorMessage.classList.add('d-none');
+            }
+
+            // Function to execute SQL query
+            function executeQuery() {
+                const query = sqlQueryInput.value.trim();
+                hideError();
+
+                // Check if query is not empty
+                if (query !== '') {
+                    // Send query to server
+                    fetch('/execute', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams({
+                            query: query,
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            showError('Error: ' + data.error);
+                        } else {
+                            const columns = data.columns;
+                            const tableData = data.data;
+                            const tableContainer = document.getElementById('table-container');
+
+                            // Clear previous table if exists
+                            tableContainer.innerHTML = '';
+
+                            // Check if Tabulator is defined
+                            if (typeof Tabulator !== 'undefined') {
+                                // Create table using Tabulator
+                                const table = new Tabulator("#table-container", {
+                                    data: tableData,
+                                    columns: columns.map(column => ({ title: column, field: column })),
+                                    layout: "fitColumns",
+                                    responsiveLayout: "hide",
+                                    tooltips: true,
+                                    addRowPos: "top",
+                                    history: true,
+                                    pagination: "local",
+                                    paginationSize: 10,
+                                    movableColumns: true,
+                                    resizableRows: true,
+                                    initialSort: [
+                                        { column: "id", dir: "asc" }
+                                    ],
+                                });
+                            } else {
+                                showError('Tabulator is not loaded.');
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        showError('Error: ' + error);
+                    });
+                } else {
+                    showError('Please enter a SQL query.');
+                }
+            }
+
+            // Execute query when "Enter" key is pressed
+            sqlQueryInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault(); // Prevent newline in textarea
+                    executeQuery();
+                }
+            });
+
+            // Execute query when "Execute" button is clicked
+            executeBtn.addEventListener('click', executeQuery);
+        });
+    </script>
+</body>
+</html>
